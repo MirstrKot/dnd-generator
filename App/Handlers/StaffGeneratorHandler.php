@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Classes;
+namespace App\Handlers;
+
+use App\Classes\DB;
 
 class StaffGeneratorHandler
 {

@@ -1,7 +1,7 @@
 <?php
 
 use App\Classes\DB;
-use App\Classes\StaffGeneratorHandler;
+use App\Handlers\StaffGeneratorHandler;
 use App\Templates\StuffGeneratorTemplate;
 
 require_once(__DIR__ . "/../App/Core.php");
