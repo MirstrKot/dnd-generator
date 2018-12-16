@@ -1,9 +1,9 @@
 <?php
 namespace App\Templates;
 
-use App\Classes\Template;
+use App\Classes\AbstractTemplate;
 
-class StuffGeneratorTemplate extends Template
+class StuffGeneratorTemplate extends AbstractTemplate
 {
     public function render() {
         ?>

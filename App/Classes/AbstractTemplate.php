@@ -2,7 +2,7 @@
 
 namespace App\Classes;
 
-abstract class Template
+abstract class AbstractTemplate
 {
     protected $data;
 
