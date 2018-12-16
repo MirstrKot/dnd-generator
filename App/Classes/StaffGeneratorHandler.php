@@ -50,7 +50,7 @@ class StaffGeneratorHandler
     private function generateItems(): self
     {
         $this->result = [];
-        if ($this->count) {
+        if ($this->count && $this->types) {
             for ($i = 1; $i <= $this->count; $i++) {
                 $this->result[] = $this->itemsQuery();
             }
@@ -86,13 +86,13 @@ class StaffGeneratorHandler
     private function typesQuery(): array
     {
         $sql = 'SELECT id, name FROM stuff_type ORDER BY id';
-        return $this->db->getAllRows($sql);
+        return $this->db->getAllRows($sql) ?: [];
     }
 
     private function rarityQuery(): array
     {
         $sql = 'SELECT id, name, code FROM stuff_rarity ORDER BY id';
-        return $this->db->getAllRows($sql);
+        return $this->db->getAllRows($sql) ?: [];
     }
 
     private function itemsQuery(): array
@@ -109,6 +109,6 @@ class StaffGeneratorHandler
                     )
                     ORDER BY RANDOM()
                     LIMIT 1';
-        return $this->db->getOneRow($sql, $this->types);
+        return $this->db->getOneRow($sql, $this->types) ?: [];
     }
 }
