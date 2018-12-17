@@ -54,7 +54,9 @@ class StaffGeneratorHandler
         $this->result = [];
         if ($this->count && $this->types) {
             for ($i = 1; $i <= $this->count; $i++) {
-                $this->result[] = $this->itemsQuery();
+                if ($category = $this->categoryQuery()) {
+                    $this->result[] = $this->itemsQuery($category['id']);
+                }
             }
         }
         return $this;
@@ -97,20 +99,24 @@ class StaffGeneratorHandler
         return $this->db->getAllRows($sql) ?: [];
     }
 
-    private function itemsQuery(): array
-    {
-        $sql = 'SELECT stuff.id, stuff.name, stuff_category.name as category_name, stuff_type.name as type_name FROM 
-                    stuff
-                    LEFT JOIN stuff_category ON stuff_category.id = stuff.category_id
-                    LEFT JOIN stuff_type ON stuff_type.id = stuff_category.stuff_type_id
-                    WHERE stuff.category_id = (SELECT id 
+    private function categoryQuery(): array {
+        $categorySql = 'SELECT id 
                         FROM stuff_category 
                         WHERE stuff_type_id IN (' . $this->db->getPlaceholdersString($this->types) . ')
                         ORDER BY RANDOM() 
-                        LIMIT 1
-                    )
-                    ORDER BY RANDOM()
-                    LIMIT 1';
-        return $this->db->getOneRow($sql, $this->types) ?: [];
+                        LIMIT 1';
+        return $this->db->getOneRow($categorySql, $this->types) ?: [];
+    }
+
+    private function itemsQuery($categoryId): array
+    {
+        $sql = 'SELECT stuff.id, stuff.name, stuff_category.name as category_name, stuff_type.name as type_name 
+                FROM stuff
+                LEFT JOIN stuff_category ON stuff_category.id = stuff.category_id
+                LEFT JOIN stuff_type ON stuff_type.id = stuff_category.stuff_type_id
+                WHERE stuff.category_id = ?
+                ORDER BY RANDOM()
+                LIMIT 1';
+        return $this->db->getOneRow($sql, [$categoryId]) ?: [];
     }
 }
