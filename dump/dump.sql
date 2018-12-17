@@ -132,7 +132,7 @@ INSERT INTO "stuff" VALUES (46, 12, 'Противоядие', 1);
 INSERT INTO "stuff" VALUES (49, 13, 'Алкоголь легкий', 2);
 INSERT INTO "stuff" VALUES (52, 12, 'Травы', 1);
 INSERT INTO "stuff" VALUES (50, 13, 'Алкоголь средний', 3);
-INSERT INTO "stuff" VALUES (51, 13, 'Алкоголь тяжелый', 4);
+INSERT INTO "stuff" VALUES (51, 13, 'Алкоголь крепкий', 4);
 INSERT INTO "stuff" VALUES (53, 14, 'Деньги', 1);
 INSERT INTO "stuff" VALUES (71, 20, 'Арбалет', 1);
 INSERT INTO "stuff" VALUES (54, 16, 'Рубящее оружие одноручное', 5);
