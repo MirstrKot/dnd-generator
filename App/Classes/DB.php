@@ -76,7 +76,7 @@ class DB
 
     private function replaceCompatibilityStrings(&$statement)
     {
-        if ($this->db == "mysql") {
+        if ($this->type == "mysql") {
             $statement = str_replace("ORDER BY RANDOM", "ORDER BY RAND", $statement);
         }
     }
