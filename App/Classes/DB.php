@@ -12,6 +12,7 @@ class DB
     protected $username;
     protected $password;
     protected $port;
+    protected $type;
 
     /** @var PDO */
     protected $connection;
@@ -23,11 +24,12 @@ class DB
         $this->username = Core::config('DB_USER');
         $this->password = Core::config('DB_PASSWORD');
         $this->port = Core::config('DB_PORT');
+        $this->type = Core::config('DB_TYPE');
     }
 
     public function connect()
     {
-        $dsn = "pgsql:host=$this->host;port=$this->port;dbname=$this->db;user=$this->username;password=$this->password";
+        $dsn = $this->type.":host=$this->host;port=$this->port;dbname=$this->db;user=$this->username;password=$this->password";
         try {
             $this->connection = new PDO($dsn);
             return true;
