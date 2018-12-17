@@ -29,9 +29,9 @@ class DB
 
     public function connect()
     {
-        $dsn = $this->type.":host=$this->host;port=$this->port;dbname=$this->db;user=$this->username;password=$this->password";
+        $dsn = $this->type.":host=$this->host;port=$this->port;dbname=$this->db";
         try {
-            $this->connection = new PDO($dsn);
+            $this->connection = new PDO($dsn, $this->username, $this->password);
             return true;
         } catch (PDOException $e) {
             echo $e->getMessage();
