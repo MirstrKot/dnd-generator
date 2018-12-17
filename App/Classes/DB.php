@@ -42,7 +42,7 @@ class DB
 
     public function query($statement, $params = [])
     {
-        $this->replaceСompatibilityStrings($statement);
+        $this->replaceCompatibilityStrings($statement);
         $statementObj = $this->connection->prepare($statement);
         $statementObj->execute($params);
         return $statementObj;
@@ -74,7 +74,7 @@ class DB
         }
     }
 
-    private function replaceСompatibilityStrings(&$statement)
+    private function replaceCompatibilityStrings(&$statement)
     {
         if ($this->db == "mysql") {
             $statement = str_replace("ORDER BY RANDOM", "ORDER BY RAND", $statement);
