@@ -8,6 +8,7 @@ class StuffGeneratorTemplate extends AbstractTemplate
     public function render() {
         ?>
         <html>
+        <body>
         <form method="POST" action="">
             <h1>Генератор предметов DND alpha</h1>
             <p>
@@ -78,6 +79,7 @@ class StuffGeneratorTemplate extends AbstractTemplate
                 margin-right: 10px;
             }
         </style>
+        </body>
         </html>
         <?php
     }
