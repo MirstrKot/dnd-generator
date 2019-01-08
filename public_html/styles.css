@@ -56,3 +56,12 @@ a.quick_link {
 .rarity_panel .rarity_item {
     margin-right: 10px;
 }
+.notes_input {
+    height: 20px;
+    width: 200px;
+    border:none;
+    font-size: 15px;
+    outline:none;
+    vertical-align: top;
+    background: #FFFFFF;
+}

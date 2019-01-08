@@ -56,6 +56,7 @@ class StuffGeneratorTemplate extends AbstractTemplate
                         <?php foreach ($this->data['rarity'] as $rarity): ?>
                             <button class="rarity_item <?=$rarity['code']?>" title="<?=$rarity['name']?>"></button>
                         <?php endforeach;?>
+                        <input style="display: none;" placeholder="Заметки" class="notes_input">
                     </div>
                 </div>
             <?php endforeach;?>

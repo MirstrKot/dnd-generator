@@ -3,6 +3,7 @@
 class Generator {
     constructor() {
         this.rarityItemSelector = '.rarity_item';
+        this.notesInputSelector = '.notes_input';
 
         this.buttonCheckAll = document.getElementById('check_all_types_button');
         this.buttonUncheckAll = document.getElementById('uncheck_all_types_button');
@@ -54,6 +55,7 @@ class Generator {
                     item.style.display = 'none';
                 }
             });
+            parent.querySelector(this.notesInputSelector).style.display = 'inline-block';
         }
         else {
             parent.querySelectorAll(this.rarityItemSelector).forEach(function (item) {
@@ -61,6 +63,7 @@ class Generator {
                     item.style.display = 'inline-block';
                 }
             });
+            parent.querySelector(this.notesInputSelector).style.display = 'none';
         }
         event.preventDefault();
     }
