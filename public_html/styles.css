@@ -1,0 +1,58 @@
+.generator_body {
+    padding: 50px;
+}
+.send_button {
+    width: 180px; height: 50px; display: block;
+}
+.number_input {
+    height: 50px;
+    display:block;
+    width: 50px;
+    text-align: center;
+}
+.type_checkbox {
+    font-size: 18px;
+}
+.result_item_header {
+    margin: 0;
+}
+a.quick_link {
+    color: #1e90ff;
+    text-decoration: none;
+    border-bottom: 1px dashed #1e90ff;
+}
+.actions_panel .quick_link {
+    margin-right: 10px;
+}
+
+.result_item_panel {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.rarity_item {
+    display: inline-block;
+    height: 20px;
+    width: 30px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.rarity_item.common {
+    background: #BFBFBF;
+}
+.rarity_item.rare {
+    background: #4572C4;
+}
+.rarity_item.epic {
+    background: #6F30A0;
+}
+.rarity_item.legendary{
+    background: #ed7d31;
+}
+.rarity_panel {
+    margin: 10px 10px 10px 0px;
+}
+.rarity_panel .rarity_item {
+    margin-right: 10px;
+}
