@@ -13,6 +13,5 @@
 - Создать env.php файл из env.php.example
 - Запустить public/index.php
 
-
-##Запуск с помощью Docker
+### Запуск с помощью Docker
 - `docker-compose up`
