@@ -3,10 +3,12 @@
 class Core
 {
     protected static $config = [];
+    public static $root;
 
     public function __construct()
     {
         spl_autoload_register('self::autoLoader');
+        self::$root = getcwd();
     }
 
     public static function autoLoader($class)

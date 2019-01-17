@@ -1,0 +1,32 @@
+{
+  "name": "dnd_gen",
+  "version": "1.0.0",
+  "description": "## Stuff generator Генерирует вещи на основе количества и выбранных категорий подходит для торговцев и лута.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode development",
+    "dev": "node_modules/.bin/webpack-dev-server --mode development --hot",
+    "prod": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikitades/dnd-generator.git"
+  },
+  "author": "MistrKot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikitades/dnd-generator/issues"
+  },
+  "homepage": "https://github.com/nikitades/dnd-generator#readme",
+  "dependencies": {
+    "buefy": "^0.7.2",
+    "css-loader": "^2.1.0",
+    "vue": "^2.5.22",
+    "vue-loader": "^15.5.1",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
