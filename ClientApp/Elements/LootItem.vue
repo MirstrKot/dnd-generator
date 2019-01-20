@@ -1,10 +1,13 @@
 <script>
+import { mapState } from "vuex";
+
 const RARITY = {
   COMMON: 0,
   RARE: 1,
   EPIC: 2,
   LEG: 3
 };
+
 export default {
   data() {
     return {
@@ -22,6 +25,9 @@ export default {
     },
     deleteMe() {
       this.$store.dispatch("deleteLootItemFromIDB", this.item.id);
+    },
+    updateMe() {
+      this.$store.dispatch("saveLootItemToIDB", this.item);
     }
   },
   props: ["item"],
@@ -41,7 +47,8 @@ export default {
     isItemInStash() {
       if (!this.item) return false;
       return this.$store.state.IDsOfItemsFromIDB.indexOf(this.item.id) !== -1;
-    }
+    },
+    ...mapState(["mode"])
   }
 };
 </script>
@@ -51,8 +58,26 @@ export default {
     <header class="card-header">
       <p class="card-header-title">{{item.name}}</p>
       <div class="card-header-icon">
-        <a v-if="!isItemInStash" href="#" @click.prevent="saveMe" class="button is-primary is-small">В сундучок</a>
-        <a v-if="isItemInStash" href="#" @click.prevent="deleteMe" class="button is-danger is-small">Выкинуть из сундучка</a>
+        <div class="buttons">
+          <a
+            v-if="mode === 'stash'"
+            href="#"
+            @click.prevent="updateMe"
+            class="button is-small"
+          >Обновить</a>
+          <a
+            v-if="!isItemInStash"
+            href="#"
+            @click.prevent="saveMe"
+            class="button is-primary is-small"
+          >В сундучок</a>
+          <a
+            v-if="isItemInStash"
+            href="#"
+            @click.prevent="deleteMe"
+            class="button is-danger is-small"
+          >Выкинуть из сундучка</a>
+        </div>
       </div>
     </header>
     <div class="card-content">
@@ -99,7 +124,13 @@ export default {
       </div>
       <div class="field">
         <div class="control">
-          <textarea cols="15" rows="3" v-model="item.description" class="textarea is-info" placeholder="Заметки"></textarea>
+          <textarea
+            cols="15"
+            rows="3"
+            v-model="item.description"
+            class="textarea is-info"
+            placeholder="Заметки"
+          ></textarea>
         </div>
       </div>
     </div>
