@@ -14,7 +14,8 @@
 - Запустить public/index.php
 
 ### Запуск с помощью Docker
-- `docker-compose up`
+- `docker-compose up -d`
+- `docker-compose down` чтобы погасить контейнеры
 
 ### Запуск бандлера
 - `npm run build` чтобы просто собрать ассеты в режиме разработки
