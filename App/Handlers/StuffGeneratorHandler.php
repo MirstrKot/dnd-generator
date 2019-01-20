@@ -4,9 +4,10 @@ namespace App\Handlers;
 
 use App\Classes\DB;
 
-class StaffGeneratorHandler
+class StuffGeneratorHandler
 {
 
+    /** @var DB */
     protected $db;
 
     protected $count;

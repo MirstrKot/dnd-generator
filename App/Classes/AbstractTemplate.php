@@ -9,6 +9,10 @@ abstract class AbstractTemplate
     public function __construct(array $data)
     {
         $this->data = $data;
+        $this->setContentType();
+    }
+
+    protected function setContentType() {
         header('Content-Type: text/html; charset=utf-8');
     }
 

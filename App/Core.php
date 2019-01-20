@@ -3,19 +3,21 @@
 class Core
 {
     protected static $config = [];
+    public static $root;
 
     public function __construct()
     {
         spl_autoload_register('self::autoLoader');
+        self::$root = getcwd();
     }
 
     public static function autoLoader($class)
     {
-        $file = __DIR__ . '/../' . str_replace('\\', '/', $class) . '.php';
+        $file_handler = __DIR__ . '/../' . str_replace('\\', '/', $class) . '.php';
 
         // if the file exists, require it
-        if (file_exists($file)) {
-            require_once($file);
+        if (file_exists($file_handler)) {
+            require_once $file_handler;
         }
     }
 
@@ -36,11 +38,10 @@ class Core
      */
     private static function loadConfig()
     {
-        $file = __DIR__ . '/../env.php';
-        if (file_exists($file)) {
-            self::$config = require_once $file;
-        }
-        else {
+        $file_path = __DIR__ . '/../env.ini';
+        if (file_exists($file_path)) {
+            self::$config = parse_ini_file($file_path, true);
+        } else {
             throw new Exception("Создайте файл env.php в корне проекта, пример в env.php.example");
         }
     }
