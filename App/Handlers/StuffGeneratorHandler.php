@@ -111,7 +111,7 @@ class StuffGeneratorHandler
 
     private function itemsQuery($categoryId): array
     {
-        $sql = 'SELECT stuff.id, stuff.name, stuff_category.name as category_name, stuff_type.name as type_name 
+        $sql = 'SELECT stuff.id, stuff.name, stuff_category.name as category_name, stuff_type.name as type_name, stuff.icon 
                 FROM stuff
                 LEFT JOIN stuff_category ON stuff_category.id = stuff.category_id
                 LEFT JOIN stuff_type ON stuff_type.id = stuff_category.stuff_type_id

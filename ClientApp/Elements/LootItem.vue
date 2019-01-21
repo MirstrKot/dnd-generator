@@ -56,7 +56,7 @@ export default {
 <template>
   <div class="card">
     <header class="card-header">
-      <p class="card-header-title">{{item.name}}</p>
+      <p class="card-header-title"><i :class="item.icon" class="ra"></i> {{item.name}}</p>
       <div class="card-header-icon">
         <div class="buttons">
           <a
