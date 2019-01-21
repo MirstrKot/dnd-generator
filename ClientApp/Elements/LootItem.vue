@@ -56,7 +56,7 @@ export default {
 <template>
   <div class="card">
     <header class="card-header">
-      <p class="card-header-title"><i :class="item.icon" class="ra"></i> {{item.name}}</p>
+      <p class="card-header-title"><i :class="item.icon" class="ra ra-lg ra-title-icon"></i> {{item.name}}</p>
       <div class="card-header-icon">
         <div class="buttons">
           <a
@@ -152,5 +152,8 @@ export default {
   .button.legendary, .button.legendary:focus, .button.legendary:hover{
     background: #ed7d31;
     color: #FFFFFF;
+  }
+  .ra-title-icon {
+      margin-right: 10px;
   }
 </style>

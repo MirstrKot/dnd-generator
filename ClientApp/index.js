@@ -3,6 +3,7 @@ import App from "./Components/App";
 import "bulma";
 import "./Styles/helpers.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
+import "rpg-awesome/css/rpg-awesome.min.css";
 import store from "./State/store";
 
 window.vm = new Vue({
