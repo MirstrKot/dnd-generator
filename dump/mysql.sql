@@ -37,7 +37,7 @@ CREATE TABLE `stuff` (
   `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `class_id` int(11) NOT NULL DEFAULT '1',
-  `icon` varchar(100) NULL,
+  `icon` varchar(100) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
