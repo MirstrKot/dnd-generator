@@ -20,11 +20,10 @@ export default {
       this.item.rarity = rarityValue;
     },
     saveMe() {
-      console.log(this.item.description);
       this.$store.dispatch("saveLootItemToIDB", this.item);
     },
     deleteMe() {
-      this.$store.dispatch("deleteLootItemFromIDB", this.item.id);
+      this.$store.dispatch("deleteLootItemFromIDB", this.item.uuid);
     },
     updateMe() {
       this.$store.dispatch("saveLootItemToIDB", this.item);
@@ -46,7 +45,7 @@ export default {
     },
     isItemInStash() {
       if (!this.item) return false;
-      return this.$store.state.IDsOfItemsFromIDB.indexOf(this.item.id) !== -1;
+      return this.$store.state.IDsOfItemsFromIDB.indexOf(this.item.uuid) !== -1;
     },
     ...mapState(["mode"])
   }

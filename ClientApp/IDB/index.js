@@ -14,6 +14,8 @@ import { openDb } from "idb";
         }
     }
 
+    This would let me write migrations in a more contorllable way for every store independanlty and explicitely.
+
     I used to create, develop and support a big project with an IndexedDB in its heart, 
     and this pattern suited well enough.
 */
@@ -22,16 +24,29 @@ const DEFAULT_STORE = "dmsGoldenStash";
 
 const dbmanager = {
     getDB() {
-        return openDb('a99lvlWizard', 1, upgradedDB => {
-            upgradedDB.createObjectStore(DEFAULT_STORE, {
-                keyPath: "id"
-            });
+        return openDb('a99lvlWizard', 3, upgradedDB => {
+            switch (upgradedDB.oldVersion) {
+                case 1:
+                    upgradedDB.createObjectStore(DEFAULT_STORE, {
+                        keyPath: "uuid"
+                    });
+                    break;
+                case 2:
+                    upgradedDB.deleteObjectStore(DEFAULT_STORE);
+                    upgradedDB.createObjectStore(DEFAULT_STORE, {
+                        keyPath: "uuid"
+                    });
+                    break;
+                default:
+                    throw new Error("Unknown IDB version!");
+                    break;
+            }
         })
     },
     goldenStash: {
-        async get(id) {
+        async get(uuid) {
             const db = await dbmanager.getDB();
-            return db.transaction(DEFAULT_STORE).objectStore(DEFAULT_STORE).get(id);
+            return db.transaction(DEFAULT_STORE).objectStore(DEFAULT_STORE).get(uuid);
         },
         async set(record) {
             const db = await dbmanager.getDB();
@@ -39,10 +54,10 @@ const dbmanager = {
             transaction.objectStore(DEFAULT_STORE).put(record);
             return transaction.complete;
         },
-        async delete(id) {
+        async delete(uuid) {
             const db = await dbmanager.getDB();
             const transation = db.transaction(DEFAULT_STORE, "readwrite");
-            transation.objectStore(DEFAULT_STORE).delete(id);
+            transation.objectStore(DEFAULT_STORE).delete(uuid);
             return transation.complete;
         },
         async clear() {
@@ -55,8 +70,8 @@ const dbmanager = {
             const db = await dbmanager.getDB();
             const transaction = db.transaction(DEFAULT_STORE);
             return transaction.objectStore(DEFAULT_STORE).getAll();
-        },  
-        async allKeys() {   
+        },
+        async allKeys() {
             const db = await dbmanager.getDB();
             const transaction = db.transaction(DEFAULT_STORE);
             return transaction.objectStore(DEFAULT_STORE).getAllKeys();

@@ -3,6 +3,7 @@ import Vue from "vue";
 import axios from "axios";
 import qs from "query-string";
 import idbStore from "../IDB";
+import uuid from "uuid/v4";
 window.idbStore = idbStore;
 
 Vue.use(Vuex);
@@ -40,6 +41,7 @@ export default new Vuex.Store({
             );
             const loot = response.data.result.map((item, number) => {
                 item.number = number;
+                item.uuid = uuid();
                 item.rarity = null; //TODO рандомизировать рарность на клиенте
                 item.description = "";
                 return item;
@@ -63,19 +65,19 @@ export default new Vuex.Store({
             ctx.state.lootItemsFromIDB = goldenStashItems;
         },
         async saveLootItemToIDB(ctx, lootItem) {
-            ctx.commit("startChangingLootItemToIDB", lootItem.id);
+            ctx.commit("startChangingLootItemToIDB", lootItem.uuid);
             await idbStore.goldenStash.set(lootItem);
-            ctx.state.lootItemsFromIDB = ctx.state.lootItemsFromIDB.filter(item => item.id !== lootItem.id); //no dubs
+            ctx.state.lootItemsFromIDB = ctx.state.lootItemsFromIDB.filter(item => item.uuid !== lootItem.uuid); //no dubs
             ctx.state.lootItemsFromIDB.push(lootItem);
-            ctx.state.IDsOfItemsFromIDB = ctx.state.IDsOfItemsFromIDB.filter(itemID => itemID !== lootItem.id); //no dubs
-            ctx.state.IDsOfItemsFromIDB.push(lootItem.id);
+            ctx.state.IDsOfItemsFromIDB = ctx.state.IDsOfItemsFromIDB.filter(itemUUID => itemUUID !== lootItem.uuid); //no dubs
+            ctx.state.IDsOfItemsFromIDB.push(lootItem.uuid);
             ctx.commit("finishChangingLootItemToIDB");
         },
-        async deleteLootItemFromIDB(ctx, lootItemID) {
-            ctx.commit("startChangingLootItemToIDB", lootItemID);
-            await idbStore.goldenStash.delete(lootItemID);
-            ctx.state.lootItemsFromIDB = ctx.state.lootItemsFromIDB.filter(item => item.id !== lootItemID);
-            ctx.state.IDsOfItemsFromIDB = ctx.state.IDsOfItemsFromIDB.filter(idbID => idbID !== lootItemID);
+        async deleteLootItemFromIDB(ctx, lootItemUUID) {
+            ctx.commit("startChangingLootItemToIDB", lootItemUUID);
+            await idbStore.goldenStash.delete(lootItemUUID);
+            ctx.state.lootItemsFromIDB = ctx.state.lootItemsFromIDB.filter(item => item.uuid !== lootItemUUID);
+            ctx.state.IDsOfItemsFromIDB = ctx.state.IDsOfItemsFromIDB.filter(idbUUID => idbUUID !== lootItemUUID);
             ctx.commit("finishChangingLootItemToIDB");
         }
     },
@@ -120,8 +122,8 @@ export default new Vuex.Store({
         clearLootItems(state) {
             state.loot = [];
         },
-        startChangingLootItemToIDB(state, lootItemID) {
-            state.saveLootItemToIDB = lootItemID;
+        startChangingLootItemToIDB(state, lootItemUUID) {
+            state.saveLootItemToIDB = lootItemUUID;
         },
         finishChangingLootItemToIDB(state) {
             state.saveLootItemToIDB = false;

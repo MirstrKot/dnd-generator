@@ -16,4 +16,3 @@ export default {
     <LootItem v-for="item in lootItemsFromIDB" :key="item.number" :item="item" class="m-b-15"/>
   </div>
 </template>
-
