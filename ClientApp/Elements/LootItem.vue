@@ -94,25 +94,25 @@ export default {
                 <div class="buttons is-grouped has-addons has-text-align-right">
                   <a
                     href="#"
-                    :class="{'is-dark': commonRarityClass}"
+                    :class="{'common': commonRarityClass}"
                     @click.prevent="markAs(rarityDict.COMMON)"
                     class="button is-small is-light"
                   >Обычное</a>
                   <a
                     href="#"
-                    :class="{'is-info': rareRarityClass}"
+                    :class="{'rare': rareRarityClass}"
                     @click.prevent="markAs(rarityDict.RARE)"
                     class="button is-small is-light"
                   >Редкое</a>
                   <a
                     href="#"
-                    :class="{'is-link': epicRarityClass}"
+                    :class="{'epic': epicRarityClass}"
                     @click.prevent="markAs(rarityDict.EPIC)"
                     class="button is-small is-light"
                   >Эпическое</a>
                   <a
                     href="#"
-                    :class="{'is-warning': legendaryRarityClass}"
+                    :class="{'legendary': legendaryRarityClass}"
                     @click.prevent="markAs(rarityDict.LEG)"
                     class="button is-small is-light"
                   >Легендарное</a>
@@ -136,3 +136,21 @@ export default {
     </div>
   </div>
 </template>
+<style scoped>
+  .button.common, .button.common:focus, .button.common:hover {
+    background: #BFBFBF;
+    color: #FFFFFF;
+  }
+  .button.rare, .button.rare:focus, .button.rare:hover {
+    background: #4572C4;
+    color: #FFFFFF;
+  }
+  .button.epic, .button.epic:focus, .button.epic:hover {
+    background: #6F30A0;
+    color: #FFFFFF;
+  }
+  .button.legendary, .button.legendary:focus, .button.legendary:hover{
+    background: #ed7d31;
+    color: #FFFFFF;
+  }
+</style>
