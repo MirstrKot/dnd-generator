@@ -34,8 +34,8 @@ export default {
 
 <template>
   <div class="m-t-10">
-    <div class="columns">
-      <div class="column">
+    <div class="columns is-mobile is-multiline">
+      <div class="column is-three-fifths-mobile">
         <p class="help">Количество вещей</p>
         <div class="field">
           <div class="control has-icons-left">
@@ -58,21 +58,21 @@ export default {
           </div>
         </div>
       </div>
-      <div class="column">
+      <div class="column is-two-fifths-mobile">
         <p class="help">&nbsp;</p>
         <div class="buttons">
           <a href="#" @click.prevent="decrement" class="button is-link has-text-weight-bold">-</a>
           <a href="#" @click.prevent="increment" class="button is-link has-text-weight-bold">+</a>
         </div>
       </div>
-      <div class="column">
+      <div class="column is-full-mobile">
         <p class="help">&nbsp;</p>
-        <div>
+        <div class="is-clearfix">
           <template v-if="mode === 'main'">
-            <a href="#" @click.prevent="toggleMode" class="button is-success is-pulled-right">Заглянуть в сундучок</a>
+            <a href="#" @click.prevent="toggleMode" class="button is-success is-pulled-right-mobile">Заглянуть в сундучок</a>
           </template>
           <template v-if="mode === 'stash'">
-            <a href="#" @click.prevent="toggleMode" class="button is-warning is-pulled-right">Прочь из сундучка</a>
+            <a href="#" @click.prevent="toggleMode" class="button is-warning is-pulled-right-mobile">Прочь из сундучка</a>
           </template>
         </div>
       </div>

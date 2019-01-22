@@ -11,6 +11,8 @@ const MODES = {
   STASH: "stash"
 };
 
+const VERSION = "2.1.1";
+
 export default {
   components: {
     NavBar,
@@ -26,6 +28,11 @@ export default {
     },
     modes() {
       return MODES;
+    },
+    versionBadgeUrl() {
+      return (
+        "https://img.shields.io/badge/dndgen-v" + VERSION + "-brightgreen.svg"
+      );
     }
   },
   beforeCreate() {
@@ -53,6 +60,18 @@ export default {
         </div>
       </div>
     </div>
+    <footer>
+      <div class="has-text-centered m-t-20 m-b-20">
+        <div class="columns is-vcentered is-mobile">
+          <div class="column">
+            <img :src="versionBadgeUrl" alt="DNDGen version">
+          </div>
+          <div class="column">
+            <img src="/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
