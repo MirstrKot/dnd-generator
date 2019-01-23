@@ -46,12 +46,12 @@ jobs:
           command: |
             rsync \
                 -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-                -rltvzO \
+                -rzv \
                 --include public_html/bundles \
-                --filter=":- .gitignore" \
-                --exclude authorized_keys \
                 --exclude .git \
                 --exclude .circleci \
+                --del --ignore-times --exclude-from=".gitignore" \
+                --exclude authorized_keys \
                 . $ssh_login@$remote_host:$remote_path
 
 workflows:
