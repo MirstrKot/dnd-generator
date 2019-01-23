@@ -67,6 +67,9 @@ export default {
             <img :src="versionBadgeUrl" alt="DNDGen version">
           </div>
           <div class="column">
+            <img src="https://circleci.com/gh/nikitades/dnd-generator/tree/master.svg?style=svg" alt="CircleCI Passing">
+          </div>
+          <div class="column">
             <img src="/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
           </div>
         </div>

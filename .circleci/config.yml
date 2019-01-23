@@ -15,12 +15,20 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - restore_cache:
+          keys:
+            - dndgen-cache-{{ checksum "package.json" }}
       - run:
           name: Building JS
           command: |
             cd ./ClientApp
             npm install
             npm run prod
+      - save_cache:
+          paths:
+            - ./public_html/bundles/
+          key: dndgen-cache-{{ checksum "package.json" }}
+          name: DndGEN Caches
   Deploy:
     docker:
       - image: circleci/php:7.3.1-fpm-stretch-node
@@ -30,16 +38,20 @@ jobs:
             - $ssh_fprint
       - attach_workspace:
           at: .
+      - restore_cache:
+          keys:
+            - dndgen-cache-{{ checksum "package.json" }}
       - run:
           name: Deploying
           command: |
             rsync \
                 -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-                --filter=":- .gitignore" \
                 -rltvzO \
+                --include public_html/bundles \
+                --filter=":- .gitignore" \
                 --exclude authorized_keys \
-                --exclude . \
-                --exclude .. \
+                --exclude .git \
+                --exclude .circleci \
                 . $ssh_login@$remote_host:$remote_path
 
 workflows:
