@@ -17,7 +17,7 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - dndgen-cache-{{ checksum "package.json" }}
+            - dndgen-cache-{{ .Revision }}
       - run:
           name: Building JS
           command: |
@@ -27,7 +27,7 @@ jobs:
       - save_cache:
           paths:
             - ./public_html/bundles/
-          key: dndgen-cache-{{ checksum "package.json" }}
+          key: dndgen-cache-{{ .Revision }}
           name: DndGEN Caches
   Deploy:
     docker:
@@ -40,7 +40,7 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - dndgen-cache-{{ checksum "package.json" }}
+            - dndgen-cache-{{ .Revision }}
       - run:
           name: Deploying
           command: |
