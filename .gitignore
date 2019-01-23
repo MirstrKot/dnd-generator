@@ -1,3 +1,5 @@
 env.php
+env.ini
 node_modules
 public_html/bundles/
+.vscode

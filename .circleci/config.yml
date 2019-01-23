@@ -1,0 +1,55 @@
+version: 2.0
+jobs:
+  GetCode:
+    docker:
+      - image: circleci/php:7.3.1-fpm-stretch-node
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  BuildJS:
+    docker:
+      - image: circleci/php:7.3.1-fpm-stretch-node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Building JS
+          command: |
+            cd ./ClientApp
+            npm install
+            npm run prod
+  Deploy:
+    docker:
+      - image: circleci/php:7.3.1-fpm-stretch-node
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - $ssh_fprint
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploying
+          command: |
+            rsync \
+                -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+                --filter=":- .gitignore" \
+                -rltvzO \
+                --exclude authorized_keys \
+                --exclude . \
+                --exclude .. \
+                . $ssh_login@$remote_host:$remote_path
+
+workflows:
+  version: 2
+  BaseWorkflow:
+    jobs:
+      - GetCode
+      - BuildJS:
+          requires:
+            - GetCode
+      - Deploy:
+          requires:
+            - BuildJS
