@@ -27,6 +27,7 @@ const dbmanager = {
         return openDb('a99lvlWizard', 3, upgradedDB => {
             switch (upgradedDB.oldVersion) {
                 case 1:
+                    upgradedDB.deleteObjectStore(DEFAULT_STORE);
                     upgradedDB.createObjectStore(DEFAULT_STORE, {
                         keyPath: "uuid"
                     });
