@@ -37,14 +37,14 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - dndgen-composer-cache-{{ checksum(composer.json) }}
+            - dndgen-composer-cache-{{ checksum "composer.json" }}
       - run:
           name: Installing PHP Dependencies
           command: composer install
       - save_cache:
           paths:
             - ./vendor
-          key: dndgen-composer-cache-{{ checksum(composer.json) }}
+          key: dndgen-composer-cache-{{ checksum "composer.json" }}
           name: DNDGen Composer Caches
   Deploy:
     docker:
@@ -58,7 +58,7 @@ jobs:
       - restore_cache:
           keys:
             - dndgen-npm-cache-{{ .Revision }}
-            - dndgen-composer-cache-{{ checksum(composer.json) }}
+            - dndgen-composer-cache-{{ checksum "composer.json" }}
       - run:
           name: Deploying
           command: |
