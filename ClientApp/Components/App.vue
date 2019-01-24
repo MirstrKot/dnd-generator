@@ -11,6 +11,8 @@ const MODES = {
   STASH: "stash"
 };
 
+console.log("Still works");
+
 const VERSION = "2.1.1";
 
 export default {

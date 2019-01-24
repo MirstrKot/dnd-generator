@@ -17,7 +17,7 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - dndgen-cache-{{ .Revision }}
+            - dndgen-npm-cache-{{ .Revision }}
       - run:
           name: Building JS
           command: |
@@ -27,8 +27,25 @@ jobs:
       - save_cache:
           paths:
             - ./public_html/bundles/
-          key: dndgen-cache-{{ .Revision }}
+          key: dndgen-npm-cache-{{ .Revision }}
           name: DndGEN Caches
+  BuildPHP:
+    docker:
+      - image: circleci/php:7.3.1-fpm-stretch-node
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          keys:
+            - dndgen-composer-cache-{{ checksum(composer.json) }}
+      - run:
+          name: Installing PHP Dependencies
+          command: composer install
+      - save_cache:
+          paths:
+            - ./vendor
+          key: dndgen-composer-cache-{{ checksum(composer.json) }}
+          name: DNDGen Composer Caches
   Deploy:
     docker:
       - image: circleci/php:7.3.1-fpm-stretch-node
@@ -40,17 +57,19 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - dndgen-cache-{{ .Revision }}
+            - dndgen-npm-cache-{{ .Revision }}
+            - dndgen-composer-cache-{{ checksum(composer.json) }}
       - run:
           name: Deploying
           command: |
             rsync \
                 -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-                -rzv \
+                -rzvI \
                 --include public_html/bundles \
+                --include vendorw
                 --exclude .git \
                 --exclude .circleci \
-                --del --ignore-times --exclude-from=".gitignore" \
+                --exclude-from=".gitignore" \
                 --exclude authorized_keys \
                 . $ssh_login@$remote_host:$remote_path
 
@@ -62,6 +81,10 @@ workflows:
       - BuildJS:
           requires:
             - GetCode
+      - BuildPHP:
+          requires:
+            - GetCode
       - Deploy:
           requires:
             - BuildJS
+            - BuildPHP

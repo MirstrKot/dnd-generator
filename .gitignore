@@ -1,5 +1,6 @@
 env.php
 env.ini
 node_modules
+vendor
 public_html/bundles/
 .vscode
