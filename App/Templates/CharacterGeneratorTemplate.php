@@ -30,16 +30,16 @@ class CharacterGeneratorTemplate extends AbstractTemplate
                     <h2><?=$name?></h2>
                     <div>
                         <label style="margin-right: 25px;">
-                            Обычный <input type="radio" name="<?=$score_type?>" value="normal" checked="checked">
+                            <input type="radio" name="<?=$score_type?>" value="normal" checked="checked"> Обычный
                         </label>
                         <label style="margin-right: 25px;">
-                            Низкий <input type="radio" name="<?=$score_type?>" value="low">
+                            <input type="radio" name="<?=$score_type?>" value="low"> Низкий
                         </label>
                         <label style="margin-right: 25px;">
-                            Высокий <input type="radio" name="<?=$score_type?>" value="high">
+                            <input type="radio" name="<?=$score_type?>" value="high"> Высокий
                         </label>
                         <label style="margin-right: 25px;">
-                            Оверпулл <input type="radio" name="<?=$score_type?>" value="overpull">
+                            <input type="radio" name="<?=$score_type?>" value="overpull"> Оверпулл
                         </label>
                     </div>
                 <?php endforeach;?>
