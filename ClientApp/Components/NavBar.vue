@@ -36,7 +36,14 @@ export default {
           </a>
         </div>
         <div id="mainNavbarMenu" class="navbar-menu" :class="{'is-active': isNavbarOpen}">
-          <div class="navbar-start"></div>
+          <div class="navbar-start">
+            <div class="navbar-item">
+              <a href="/">Генератор лута</a>
+            </div>
+            <div class="navbar-item">
+              <a href="/character/">Генератор NPC</a>
+            </div>
+          </div>
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
