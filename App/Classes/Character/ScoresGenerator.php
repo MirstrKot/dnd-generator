@@ -89,8 +89,6 @@ class ScoresGenerator
             }
             $this->resultScoreSet->$scoreType = $this->generateBaseScore($weightType);
         }
-        echo "До генерации левела <br>".PHP_EOL;
-        var_dump($this->resultScoreSet);
     }
 
     /**
