@@ -3,8 +3,9 @@
 namespace App\Handlers;
 
 use App\Classes\DB;
+use App\Helpers\RequestHelper;
 
-class StuffGeneratorHandler
+class StuffGeneratorHandler implements IHandler
 {
 
     /** @var DB */
@@ -35,8 +36,8 @@ class StuffGeneratorHandler
 
     private function getDataFromPost(): self
     {
-        $this->count = $this->getFromPost('count');
-        $this->types = $this->getFromPost('types');
+        $this->count = RequestHelper::getFromPost('count');
+        $this->types = RequestHelper::getFromPost('types');
         return $this;
     }
 
@@ -81,11 +82,6 @@ class StuffGeneratorHandler
         $this->templateData['requested_types'] = $types;
         $this->templateData['result'] = $this->result;
         return $this;
-    }
-
-    private function getFromPost($field)
-    {
-        return isset($_POST[$field]) ? $_POST[$field] : null;
     }
 
     private function typesQuery(): array

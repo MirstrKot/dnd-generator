@@ -1,8 +1,10 @@
 <?php
 
 use App\Classes\DB;
+use App\Handlers\CharacterGeneratorHandler;
 use App\Handlers\StuffGeneratorHandler;
 use App\Templates\ApiDataTemplate;
+use App\Templates\CharacterGeneratorTemplate;
 use App\Templates\StuffGeneratorTemplate;
 use App\Handlers\StartInfoHandler;
 
@@ -22,6 +24,12 @@ switch ($_SERVER["REQUEST_URI"]) {
         $handler = new StuffGeneratorHandler($db);
         $templateData = $handler->run();
         $template = new ApiDataTemplate($templateData);
+        $template->render();
+        break;
+    case "/character/":
+        $handler = new CharacterGeneratorHandler();
+        $templateData = $handler->run();
+        $template = new CharacterGeneratorTemplate($templateData);
         $template->render();
         break;
     default:
