@@ -20,12 +20,27 @@ switch ($_SERVER["REQUEST_URI"]) {
         $template = new ApiDataTemplate($templateData);
         $template->render();
         break;
+    case "/getCharacterInfo/":
+        $handler = new CharacterGeneratorHandler();
+        $templateData = $handler->run();
+        $template = new ApiDataTemplate($templateData);
+        $template->render();
+        break;
+    case "/generateCharacter/":
+        //убрать после перевода на реактивный интерфейс
+        $_POST['generate'] = 1;
+        $handler = new CharacterGeneratorHandler();
+        $templateData = $handler->run();
+        $template = new ApiDataTemplate($templateData);
+        $template->render();
+        break;
     case "/getItems/":
         $handler = new StuffGeneratorHandler($db);
         $templateData = $handler->run();
         $template = new ApiDataTemplate($templateData);
         $template->render();
         break;
+    //TODO: убрать после перевода на реактивный интерфейс
     case "/character/":
         $handler = new CharacterGeneratorHandler();
         $templateData = $handler->run();
