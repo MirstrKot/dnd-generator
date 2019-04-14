@@ -1,9 +1,9 @@
 # DND Generator v0.1
 
 ## Возможности
-###Stuff generator
+### Stuff generator
 Генерирует вещи на основе количества и выбранных категорий подходит для торговцев и лута.
-###NPC-stats generator
+### NPC-stats generator
 Генерирует статы персонажей NPC и мобов по заданным параметрам.
 
 
